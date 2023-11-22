@@ -64,14 +64,6 @@ fun GameScreen(
             }
 
         }
-        val collisions = Thread {
-            while (alive) {
-                Thread.sleep(200)
-                if(chikenPosition.y<0){
-                    alive=false
-                }
-            }
-        }
 
         val velocity = Thread {
             while (alive) {
@@ -84,30 +76,22 @@ fun GameScreen(
                     x = max_width+200
                     pipe_height = ((200..(max_height/1.1).toInt()).random()).toFloat()
                     println(pipe_height)
+                    points++
                 }
 
             }
         }
 
-        var getPoints = Thread{
-            while (alive){
-                Thread.sleep(2000)
-                points++
-            }
-        }
+
         gravity.priority = Thread.MAX_PRIORITY
         velocity.priority = Thread.MAX_PRIORITY
 
         gravity.start()
-        collisions.start()
         velocity.start()
-        getPoints.start()
 
         onDispose {
-            collisions.interrupt()
             gravity.interrupt()
             velocity.interrupt()
-            getPoints.interrupt()
         }
     }
     Column (modifier = Modifier.fillMaxSize()){

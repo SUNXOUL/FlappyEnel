@@ -5,13 +5,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
@@ -47,14 +50,10 @@ fun Chiken(
                 }
                 .build()
             Image(
-                painter = rememberAsyncImagePainter(
-                    ImageRequest.Builder(context).data(data = R.drawable.bird2gif).apply(block = {
-                        size(Size.ORIGINAL)
-                    }).build(), imageLoader = imageLoader
-                ),
-                contentDescription = null,
-                modifier = modifier.fillMaxWidth(),
-            )
+                painter = painterResource(id = R.drawable.enelflappyplayer), contentDescription = "Player", modifier = Modifier.size(100.dp,150.dp), contentScale = ContentScale.FillBounds
+                )
+
+
         }
     }
 }
