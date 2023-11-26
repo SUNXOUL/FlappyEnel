@@ -52,8 +52,6 @@ fun Chiken(
             Image(
                 painter = painterResource(id = R.drawable.flappy__7_), contentDescription = "Player", modifier = Modifier.size(100.dp,150.dp), contentScale = ContentScale.FillBounds
                 )
-
-
         }
     }
 }

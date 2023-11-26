@@ -8,8 +8,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sagrd.flappyenel.ui.GameScreen.GameScreen
+import com.sagrd.flappyenel.ui.LoseScreen.LoseScreen
 import com.sagrd.flappyenel.ui.MenuScreen.MenuScreen
+import com.sagrd.flappyenel.ui.RankScreen.RankScreen
 import com.sagrd.flappyenel.ui.SplashScreen.SplashScreen
+import com.sagrd.flappyenel.ui.StoreScreen.StoreScreen
 
 
 @Composable
@@ -32,6 +35,15 @@ fun AppNavigation(
         }
         composable(AppScreens.GameScreen.route) {
             GameScreen(nav= navController)
+        }
+        composable(AppScreens.LoseScreen.route) {
+            LoseScreen(nav= navController)
+        }
+        composable(AppScreens.RankScreen.route) {
+            RankScreen(nav= navController)
+        }
+        composable(AppScreens.StoreScreen.route) {
+            StoreScreen(nav= navController)
         }
 
     }

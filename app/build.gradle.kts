@@ -125,6 +125,7 @@ android {
         implementation ("androidx.appcompat:appcompat:1.4.0")
         implementation ("com.google.android.material:material:1.4.0")
 
+        implementation ("androidx.compose.ui:ui-text-google-fonts:1.5.2")
 
         implementation ("io.coil-kt:coil-compose:2.1.0")
         implementation ("io.coil-kt:coil-gif:2.1.0")
