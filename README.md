@@ -11,3 +11,4 @@
    <img src="https://i.ibb.co/1J1Djg9/Flappy-Enel-Logo.png"/>
 </div>
   <h2>Kevin Duran 2020-0398<br>Cesar Reynoso 2020-0516<br></h2>
+  <h2>Flappy enel es un juego desarrollado en Kotlin para dispositivos android con la metodologia de FlappyBird supera los obstaculos obteniendo puntos hasta alcanzar tus limites!</h2>
