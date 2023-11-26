@@ -7,4 +7,7 @@
  
   <h1>(Proyecto Final Programación Aplicada 2).</h1>
   <h1>(FLAPPYENEL THE GAME).</h1>
+  <div align = "center">
+   <img src="https://i.postimg.cc/yNZVHc3V/Login.png"/>
+</div>
   <h2>Kevin Duran 2020-0398<br>Cesar Reynoso 2020-0516<br></h2>
