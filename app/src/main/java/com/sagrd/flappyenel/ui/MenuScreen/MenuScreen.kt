@@ -108,11 +108,7 @@ fun MenuScreen(
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.storebutton), contentDescription ="Play")
                     }
-                    IconButton(onClick = { /*TODO*/ },modifier = Modifier
-                        .padding(10.dp)
-                        .fillMaxWidth()) {
-                        Image(painter =  painterResource(id = R.drawable.creditsbutton), contentDescription ="Play")
-                    }
+
                 }
             }
         }

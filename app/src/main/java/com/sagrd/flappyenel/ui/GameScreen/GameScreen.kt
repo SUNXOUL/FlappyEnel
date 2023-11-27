@@ -1,22 +1,32 @@
 package com.sagrd.flappyenel.ui.GameScreen
 
+import android.content.res.Resources.Theme
+import android.os.Build
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.Colors
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material3.Button
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -28,20 +38,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.toFontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.request.ImageRequest
+import coil.size.Size
 import com.sagrd.flappyenel.ui.nodes.Chiken
 import com.sagrd.flappyenel.ui.nodes.Pipe
 import com.sagrd.flappyenel.ui.nodes.alive
 import com.sagrd.flappyenel.ui.nodes.chikenPosition
 import com.sagrd.personas.Nav.AppScreens
 import com.sagrd.flappyenel.R
+import com.sagrd.flappyenel.ui.theme.FlappyEnelTheme
 import kotlin.math.absoluteValue
 
 var points by mutableIntStateOf(0)
@@ -57,8 +79,8 @@ fun GameScreen(
     var x by remember { mutableStateOf(max_width +200f) }
     val max_height = displayMetrics.heightPixels / density
     var pipe_height by remember { mutableStateOf(400f) }
-
-
+    var fontPixel = Font(R.font.pixelfont).toFontFamily()
+    var fast by remember { mutableStateOf(0.3f) }
 
 
     DisposableEffect(Unit) {
@@ -69,7 +91,7 @@ fun GameScreen(
         val gravity = Thread {
             while (alive) {
                 Thread.sleep(1)
-                if (y < (max_height) -10) {
+                if ((y < (max_height) -10 ) && y > -150 ) {
                     y += 0.5f
                 }
                 else{
@@ -83,7 +105,7 @@ fun GameScreen(
             while (alive) {
                 Thread.sleep(1)
                 if (x > (max_width) - 500) {
-                    x -= 0.5f
+                    x -= fast
                 }
                 else
                 {
@@ -92,6 +114,9 @@ fun GameScreen(
                     println(pipe_height)
                     if(alive){
                         points++
+                        if(fast<1.7f){
+                            fast += 0.02f
+                        }
                     }
                 }
             }
@@ -109,18 +134,65 @@ fun GameScreen(
             velocity.interrupt()
         }
     }
-    Column (modifier = Modifier.fillMaxSize()){
-        Row(modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.End) {
-            Text(text = "Puntos: ${points}")
+    Box(modifier =Modifier.fillMaxSize() ){
+        val context = LocalContext.current
+        val imageLoader = ImageLoader.Builder(context)
+            .components {
+                if (Build.VERSION.SDK_INT >= 28) {
+                    add(ImageDecoderDecoder.Factory())
+                } else {
+                    add(GifDecoder.Factory())
+                }
+            }
+            .build()
+        if (fast>=1 && fast<1.7f){
+            Image(
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(context).data(data = R.drawable.oceanbackground).apply(block = {
+                        size(Size.ORIGINAL)
+                    }).build(), imageLoader = imageLoader
+                ),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxSize().aspectRatio(2.5f, matchHeightConstraintsFirst = true)
+            )
+        }
+        if (fast>=1.7){
+            Image(
+                painter = rememberAsyncImagePainter(
+                    ImageRequest.Builder(context).data(data = R.drawable.hellbackground).apply(block = {
+                        size(Size.ORIGINAL)
+                    }).build(), imageLoader = imageLoader
+                ),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxSize().aspectRatio(2.5f, matchHeightConstraintsFirst = true)
+            )
+        }
+
+    }
+
+    Column (modifier = Modifier
+        .fillMaxSize()
+        .clickable {
+            if (alive) {
+                y -= 110
+            }
+
+        }){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),horizontalArrangement = Arrangement.Center) {
+            Surface(color = Color(0xFFEAE4C3),modifier = Modifier.border(border = BorderStroke(width = 1.dp, color = Color.Black))) {
+                Text(text = "${points} pts", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
+            }
+
         }
 
         Box(modifier = Modifier
-            .clickable {
-                if (alive) {
-                    y -= 150
-                }
 
-            }
             .fillMaxWidth()
         ){
             Chiken(y =y ,
@@ -131,10 +203,10 @@ fun GameScreen(
                     }
             )
             Pipe(x = x, y = pipe_height,
-                modifier = Modifier, nav = nav
+                modifier = Modifier, nav = nav, fast = fast
             )
             Pipe(x = x, y = (pipe_height-850),
-                modifier = Modifier, nav = nav
+                modifier = Modifier, nav = nav,fast = fast
             )
 
         }
@@ -144,9 +216,6 @@ fun GameScreen(
     if (!alive) {
         androidx.compose.material3.AlertDialog(
             onDismissRequest = {
-                // Dismiss the dialog when the user clicks outside the dialog or on the back
-                // button. If you want to disable that functionality, simply use an empty
-                // onDismissRequest.
             }
         ) {
             Surface(
@@ -157,8 +226,26 @@ fun GameScreen(
                 shape = MaterialTheme.shapes.large
             ) {
                 Image(painter = painterResource(id = R.drawable.losemodal), contentDescription ="" )
-                Column(modifier = Modifier.padding(top =100.dp).fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                    Text(text = "${points} pts", style = MaterialTheme.typography.h2, fontFamily = FontFamily.)
+                Column(modifier = Modifier
+                    .padding(top = 100.dp)
+                    .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+
+                    Text(
+                        text = "${points} pts",
+                        style = MaterialTheme.typography.h2,
+                        fontFamily = fontPixel
+                    )
+                    IconButton(onClick = { nav.navigate(AppScreens.GameScreen.route) },modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()) {
+                        Image(painter =  painterResource(id = R.drawable.retrybutton), contentDescription ="Retry")
+                    }
+                    IconButton(onClick = { nav.navigate(AppScreens.MenuScreen.route) },modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()) {
+                        Image(painter =  painterResource(id = R.drawable.backbutton), contentDescription ="Back")
+                    }
+
                 }
             }
         }
@@ -167,3 +254,5 @@ fun GameScreen(
 fun isTouching(position2: Offset, position3 : Offset): Boolean {
     return ((chikenPosition.x -position3.x).absoluteValue <20 &&  chikenPosition.y in position2.y..position3.y)
 }
+
+
