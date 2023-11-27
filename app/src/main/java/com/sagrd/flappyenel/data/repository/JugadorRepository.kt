@@ -27,7 +27,7 @@ class JugadorRepository @Inject constructor(
         }
     }
 
-    fun getGastoById(id: Int): Flow<Resource<JugadorDto>> = flow {
+    fun getJugadorById(id: Int): Flow<Resource<JugadorDto>> = flow {
         try {
             emit(Resource.Loading())
             val jugador = jugadorApi.getJugadorById(id)
@@ -39,11 +39,11 @@ class JugadorRepository @Inject constructor(
         }
     }
 
-    suspend fun deleteGasto(id: Int) {
+    suspend fun deleteJugador(id: Int) {
         jugadorApi.deleteJugadorById(id)
     }
 
-    suspend fun postGasto(jugador : JugadorDto) : JugadorDto?{
+    suspend fun postJugador(jugador : JugadorDto) : JugadorDto?{
         return try {
             withContext(Dispatchers.IO) {
                 val response = jugadorApi.postJugador(jugador)
@@ -58,7 +58,7 @@ class JugadorRepository @Inject constructor(
         }
     }
 
-    suspend fun putGasto(jugador : JugadorDto) {
+    suspend fun putJugador(jugador : JugadorDto) {
         jugadorApi.putJugador(jugador)
     }
 

@@ -21,5 +21,7 @@ interface JugadorApi {
     suspend fun deleteJugadorById(@Path("id") jugadorId : Int) : Response<Unit>
     @PUT("api/Jugador")
     suspend fun putJugador(@Body jugador : JugadorDto) : Response<Unit>
+    @GET("api/Jugador/{usuario}/{clave}")
+    suspend fun login(@Path("usuario") usuario : String, @Path("clave") clave : String) :  Response<JugadorDto>
 
 }

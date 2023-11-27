@@ -4,7 +4,16 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-
+@JsonClass(generateAdapter = true)
+data class  ServiceResponseDto(
+    @PrimaryKey
+    @Json(name="data")
+    val data : JugadorDto,
+    @Json(name="succes")
+    val success : Boolean,
+    @Json(name="message")
+    val message : String
+)
 @JsonClass(generateAdapter = true)
 data class JugadorDto(
 
