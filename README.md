@@ -8,9 +8,11 @@
   <h1>(Proyecto Final Programación Aplicada 2).</h1>
   <h1>(FLAPPYENEL THE GAME).</h1>
   
-   <h4>(OFICIAL TRAILER).</h4>
- [![Alt text]([https://www.youtube.com/watch?v=YJX6RySWX0](https://www.youtube.com/watch?v=YJX6RySWX0c)c)
-  
+   <h4>(OFICIAL TRAILER)</h4>
+   <div align = center>
+     [![Alt text]([https://www.youtube.com/watch?v=YJX6RySWX0](https://www.youtube.com/watch?v=YJX6RySWX0c))
+     [![Alt text](https://img.youtube.com/vi/Z05MwMvEyWQ/0.jpg)](https://www.youtube.com/watch?v=Z05MwMvEyWQ)
+   </div>
   <div align = "center">
    <img src="https://i.ibb.co/1J1Djg9/Flappy-Enel-Logo.png"/>
 </div>
