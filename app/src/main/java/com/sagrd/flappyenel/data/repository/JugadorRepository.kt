@@ -62,5 +62,36 @@ class JugadorRepository @Inject constructor(
         jugadorApi.putJugador(jugador)
     }
 
+    suspend fun login(usuario : String, clave : String) : JugadorDto?
+    {
+        return try {
+            withContext(Dispatchers.IO) {
+                val response = jugadorApi.login(usuario,clave)
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    suspend fun toRegister(jugador : JugadorDto): JugadorDto? {
+        return try {
+            withContext(Dispatchers.IO) {
+                val response = jugadorApi.toRegister(jugador)
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
 
 }

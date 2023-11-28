@@ -23,5 +23,6 @@ interface JugadorApi {
     suspend fun putJugador(@Body jugador : JugadorDto) : Response<Unit>
     @GET("api/Jugador/{usuario}/{clave}")
     suspend fun login(@Path("usuario") usuario : String, @Path("clave") clave : String) :  Response<JugadorDto>
-
+    @POST("api/Jugador/ToRegister")
+    suspend fun toRegister(@Body jugador : JugadorDto) : Response<JugadorDto>
 }
