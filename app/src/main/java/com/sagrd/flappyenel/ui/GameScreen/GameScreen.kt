@@ -1,6 +1,5 @@
 package com.sagrd.flappyenel.ui.GameScreen
 
-import android.content.res.Resources.Theme
 import android.os.Build
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -17,16 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.Colors
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material3.Button
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -45,10 +39,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.toFontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.ImageLoader
@@ -57,13 +49,12 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
+import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.ui.nodes.Chiken
 import com.sagrd.flappyenel.ui.nodes.Pipe
 import com.sagrd.flappyenel.ui.nodes.alive
 import com.sagrd.flappyenel.ui.nodes.chikenPosition
 import com.sagrd.personas.Nav.AppScreens
-import com.sagrd.flappyenel.R
-import com.sagrd.flappyenel.ui.theme.FlappyEnelTheme
 import kotlin.math.absoluteValue
 
 var points by mutableIntStateOf(0)
@@ -203,10 +194,10 @@ fun GameScreen(
                     }
             )
             Pipe(x = x, y = pipe_height,
-                modifier = Modifier, nav = nav, fast = fast
+                modifier = Modifier, fast = fast
             )
             Pipe(x = x, y = (pipe_height-850),
-                modifier = Modifier, nav = nav,fast = fast
+                modifier = Modifier, fast = fast
             )
 
         }
@@ -240,7 +231,9 @@ fun GameScreen(
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.retrybutton), contentDescription ="Retry")
                     }
-                    IconButton(onClick = { nav.navigate(AppScreens.MenuScreen.route) },modifier = Modifier
+                    IconButton(onClick = {
+                        alive = true
+                        nav.navigate(AppScreens.MenuScreen.route) },modifier = Modifier
                         .padding(10.dp)
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.backbutton), contentDescription ="Back")
