@@ -5,14 +5,14 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class  ServiceResponseDto(
+data class  ServiceResponseDto<T>(
     @PrimaryKey
     @Json(name="data")
-    val data : JugadorDto,
+    val data : T,
     @Json(name="succes")
-    val success : Boolean,
+    val success : Boolean = true,
     @Json(name="message")
-    val message : String
+    val message : String = ""
 )
 @JsonClass(generateAdapter = true)
 data class JugadorDto(

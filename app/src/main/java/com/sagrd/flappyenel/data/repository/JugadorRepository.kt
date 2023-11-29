@@ -2,6 +2,7 @@ package com.sagrd.flappyenel.data.repository
 
 import com.sagrd.flappyenel.data.remote.api.JugadorApi
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
+import com.sagrd.flappyenel.data.remote.dto.ServiceResponseDto
 import com.sagrd.flappyenel.util.Resources.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,10 +15,10 @@ import javax.inject.Inject
 class JugadorRepository @Inject constructor(
     private val jugadorApi : JugadorApi
 ) {
-    fun getJugadores() : Flow<Resource<List<JugadorDto>>> = flow{
+    fun getJugadores() : Flow<Resource<List<JugadorDto>?>> = flow{
         try{
             emit(Resource.Loading())
-            val jugadores = jugadorApi.getJugadores()
+            val jugadores = jugadorApi.getJugadores()?.data
             emit(Resource.Success(jugadores))
         }catch (e: IOException){
             emit(Resource.Error(e.message ?: "Verificar Conexion"))
@@ -27,7 +28,7 @@ class JugadorRepository @Inject constructor(
         }
     }
 
-    fun getJugadorById(id: Int): Flow<Resource<JugadorDto>> = flow {
+    fun getJugadorById(id: Int): Flow<Resource<ServiceResponseDto<JugadorDto>?>> = flow {
         try {
             emit(Resource.Loading())
             val jugador = jugadorApi.getJugadorById(id)
@@ -62,7 +63,7 @@ class JugadorRepository @Inject constructor(
         jugadorApi.putJugador(jugador)
     }
 
-    suspend fun login(usuario : String, clave : String) : JugadorDto?
+    suspend fun login(usuario : String, clave : String) : ServiceResponseDto<JugadorDto>?
     {
         return try {
             withContext(Dispatchers.IO) {
