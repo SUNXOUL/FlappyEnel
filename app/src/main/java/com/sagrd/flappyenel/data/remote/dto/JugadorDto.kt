@@ -22,6 +22,8 @@ data class JugadorDto(
     val jugadorId : Int?,
     @Json(name="nombreCompleto")
     val nombreCompleto : String,
+    @Json(name="usuario")
+    val usuario : String,
     @Json(name="clave")
     val clave : String,
     @Json(name="puntuacion")

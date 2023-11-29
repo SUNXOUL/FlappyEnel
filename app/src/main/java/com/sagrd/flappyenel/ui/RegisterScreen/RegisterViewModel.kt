@@ -4,8 +4,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -13,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    repository: JugadorRepository
+    private val repository: JugadorRepository
 ) : ViewModel(){
 
     var nombreCompleto by mutableStateOf("")
@@ -36,6 +39,34 @@ class RegisterViewModel @Inject constructor(
         nombreCompleto= valor
         nombreCompletoError= valor.isNullOrBlank()
     }
+
+
+    fun validate() : Boolean
+    {
+        onNombreCompletoChange(nombreCompleto)
+        onUsuarioChange(usuario)
+        onClaveChange(clave)
+
+        return claveError || usuarioError || nombreCompletoError
+    }
+
+    fun toRegister(){
+        viewModelScope.launch {
+            repository.toRegister(JugadorDto(jugadorId = 0, nombreCompleto = nombreCompleto
+            , usuario = usuario, clave = clave))
+            clean()
+        }
+    }
+
+    fun clean()
+    {
+        nombreCompleto = ""
+        usuario = ""
+        clave = ""
+    }
+
+
+
 
 
 
