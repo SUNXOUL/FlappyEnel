@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
@@ -23,19 +21,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.AsyncImagePainter.State.Empty.painter
-import coil.compose.ImagePainter
-import coil.compose.rememberAsyncImagePainter
 import com.sagrd.flappyenel.R
-import com.sagrd.personas.Nav.AppScreens
 import kotlin.math.absoluteValue
 
 @SuppressLint("UnrememberedMutableState")
@@ -45,7 +37,6 @@ fun Pipe(
     y : Float,
     modifier : Modifier,
     fast : Float,
-    nav : NavController
     ) {
     var obstaculePosition : Offset by remember {
         mutableStateOf(Offset(x=0f,y=0f))
