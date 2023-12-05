@@ -25,3 +25,7 @@ Only for test the beta on your `android`:
 ```sh
 git clone https://github.com/SUNXOUL/FlappyEnel.git
 ```
+
+<div align="center">
+  <img src="https://i.postimg.cc/0N3Q6GT0/Installation-for-the-readme.png" width="800px" height="300px"/>
+</div>
