@@ -1,6 +1,7 @@
 package com.sagrd.flappyenel.di
 
 import com.sagrd.flappyenel.data.remote.api.JugadorApi
+import com.sagrd.flappyenel.data.repository.JugadorRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -21,6 +22,12 @@ object AppModule {
         return Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideJugadorRepository(jugadorApi: JugadorApi): JugadorRepository {
+        return JugadorRepository(jugadorApi)
     }
 
     @Provides

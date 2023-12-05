@@ -3,6 +3,7 @@ package com.sagrd.flappyenel.ui.nodes
 import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
@@ -23,6 +24,8 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
 import com.sagrd.flappyenel.R
+import com.sagrd.flappyenel.skinSelected
+import com.sagrd.flappyenel.skins
 
 var alive by  mutableStateOf(true)
 var chikenPosition by mutableStateOf(Offset(0f, 0f))
@@ -33,12 +36,10 @@ fun Chiken(
 ) {
     Box(
         modifier = Modifier
-            .offset(x = 20.dp, y = (y).dp)
+            .offset(x = 20.dp, y = (y).dp).size(60.dp,65.dp)
 
     ) {
-        Box(
-            modifier = modifier
-        ){
+
             val context = LocalContext.current
             val imageLoader = ImageLoader.Builder(context)
                 .components {
@@ -50,8 +51,10 @@ fun Chiken(
                 }
                 .build()
             Image(
-                painter = painterResource(id = R.drawable.flappy__7_), contentDescription = "Player", modifier = Modifier.size(100.dp,150.dp), contentScale = ContentScale.FillBounds
+                painter = painterResource(id = skins[skinSelected]),
+                contentDescription = "Player", modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds
                 )
-        }
+
     }
 }

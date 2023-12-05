@@ -19,13 +19,13 @@ data class JugadorDto(
 
     @PrimaryKey
     @Json(name="jugadorId")
-    val jugadorId : Int?,
+    val jugadorId: Int?,
     @Json(name="nombreCompleto")
-    val nombreCompleto : String,
+    val nombreCompleto: String,
     @Json(name="usuario")
-    val usuario : String,
+    val usuario: String,
     @Json(name="clave")
-    val clave : String,
+    val clave: String,
     @Json(name="puntuacion")
-    val puntuacion : Int = 0
+    val puntuacion: Int = 0
 )

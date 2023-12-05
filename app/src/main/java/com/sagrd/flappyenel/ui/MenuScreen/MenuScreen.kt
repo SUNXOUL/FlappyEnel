@@ -1,5 +1,6 @@
 package com.sagrd.flappyenel.ui.MenuScreen
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.Image
@@ -50,23 +51,31 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.sagrd.flappyenel.R
+import com.sagrd.flappyenel.player
+import com.sagrd.flappyenel.toLogedUser
+import com.sagrd.flappyenel.ui.LoginScreen.LoginModal
+import com.sagrd.flappyenel.ui.LoginScreen.LoginViewModel
+import com.sagrd.flappyenel.ui.RegisterScreen.RegisterModal
+import com.sagrd.flappyenel.ui.RegisterScreen.RegisterViewModel
 import com.sagrd.flappyenel.ui.nodes.alive
 import com.sagrd.personas.Nav.AppScreens
 import kotlinx.coroutines.delay
 
+@SuppressLint("UnrememberedMutableState", "StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuScreen(
     music : MediaPlayer,
-    nav : NavController
+    nav : NavController,
+    loginViewModel : LoginViewModel = hiltViewModel(),
+    registerViewModel: RegisterViewModel = hiltViewModel()
 ){
-
+    val fontPixel = Font(R.font.pixelfont).toFontFamily()
     val musicOn = painterResource(id = R.drawable.soundbutton)
     val musicOff = painterResource(id = R.drawable.soundoffbutton)
-    val fontPixel = Font(R.font.pixelfont).toFontFamily()
-    var passwordVisible by rememberSaveable { mutableStateOf(false) }
     var musicButtonPaint : Painter by remember {
         mutableStateOf(musicOn)
     }
@@ -88,6 +97,7 @@ fun MenuScreen(
             ){
                 Image(painter =  musicButtonPaint, contentDescription ="Music")
             }
+            Text(text = player.usuario, fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h3)
 
         }
         Box {
@@ -114,12 +124,12 @@ fun MenuScreen(
                         Image(painter =  painterResource(id = R.drawable.playbutton), contentDescription ="Play", modifier = Modifier
                             .clip(RectangleShape),contentScale = ContentScale.FillWidth)
                     }
-                    IconButton(onClick = { /*TODO*/ },modifier = Modifier
+                    IconButton(onClick = { nav.navigate(AppScreens.ScoreScreen.route) },modifier = Modifier
                         .padding(10.dp)
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.scorebutton), contentDescription ="Play")
                     }
-                    IconButton(onClick = { /*TODO*/ },modifier = Modifier
+                    IconButton(onClick = { nav.navigate(AppScreens.StoreScreen.route) },modifier = Modifier
                         .padding(10.dp)
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.storebutton), contentDescription ="Play")
@@ -128,76 +138,16 @@ fun MenuScreen(
                 }
             }
         }
-
-    }
-    if (alive) {
-        androidx.compose.material3.AlertDialog(
-            onDismissRequest = {
+        if (player.jugadorId == 0){
+            if (toLogedUser){
+                LoginModal(loginViewModel = loginViewModel)
             }
-        ) {
-            Surface(
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .wrapContentHeight(),
-                color = Color.Transparent,
-                shape = MaterialTheme.shapes.large
-            ) {
-                Image(painter = painterResource(id = R.drawable.modal), contentDescription ="" )
-                Column(modifier = Modifier
-                    .padding(20.dp)
-                    .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
-                {
-                    Text(text = "Login", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
-                    Spacer(modifier = Modifier.padding(top=10.dp))
-                    TextField(value = "", onValueChange = {}, placeholder = {
-                        Text(text = "USERNAME", fontFamily = fontPixel)
-                    },
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = Color(0xFFEF5C03),
-                            cursorColor =  Color(0xFFEF5C03),
-                            unfocusedBorderColor = Color.Gray
-                        )
-                        )
-                    Spacer(modifier = Modifier.padding(top=10.dp))
-                    TextField(
-                        value = "sdasdsadsdasd",
-                        onValueChange = { },
-                        label = { Text(text="PASSWORD", fontFamily = fontPixel) },
-                        singleLine = true,
-                        placeholder = { Text("Password") },
-                        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                        trailingIcon = {
-                            val image = if (passwordVisible)
-                                Icons.Filled.Visibility
-                            else Icons.Filled.VisibilityOff
-                            val description = if (passwordVisible) "Hide password" else "Show password"
-                            IconButton(onClick = {passwordVisible = !passwordVisible}){
-                                Icon(imageVector  = image, description)
-                            }
-                        },
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = Color(0xFFEF5C03),
-                            cursorColor =  Color(0xFFEF5C03),
-                            unfocusedBorderColor = Color.Gray
-                        )
-                    )
-                    Spacer(modifier = Modifier.padding(top=10.dp))
-                    IconButton(onClick = { /*TODO*/ },modifier = Modifier
-                        .padding(10.dp)
-                        .fillMaxWidth()) {
-                        Image(painter =  painterResource(id = R.drawable.loginbutton), contentDescription ="login")
-                    }
-                    TextButton(onClick = { /*TODO*/ }) {
-                        Text(text = "Create Account", fontFamily = fontPixel)
-                    }
-
-                }
-
-
+            else {
+                RegisterModal( registerViewModel = registerViewModel)
             }
         }
     }
+
 }
 
 

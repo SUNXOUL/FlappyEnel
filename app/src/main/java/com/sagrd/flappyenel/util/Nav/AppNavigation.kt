@@ -3,14 +3,13 @@ package com.sagrd.personas.Nav
 import android.content.Context
 import android.media.MediaPlayer
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sagrd.flappyenel.ui.GameScreen.GameScreen
 import com.sagrd.flappyenel.ui.LoseScreen.LoseScreen
 import com.sagrd.flappyenel.ui.MenuScreen.MenuScreen
-import com.sagrd.flappyenel.ui.RankScreen.RankScreen
+import com.sagrd.flappyenel.ui.ScoreScreen.ScoreScreen
 import com.sagrd.flappyenel.ui.SplashScreen.SplashScreen
 import com.sagrd.flappyenel.ui.StoreScreen.StoreScreen
 
@@ -21,6 +20,7 @@ fun AppNavigation(
     music : MediaPlayer
 )
 {
+
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -31,7 +31,7 @@ fun AppNavigation(
            SplashScreen(nav = navController)
         }
         composable(AppScreens.MenuScreen.route) {
-            MenuScreen(music =  music , nav = navController)
+            MenuScreen(music =  music , nav = navController )
         }
         composable(AppScreens.GameScreen.route) {
             GameScreen(nav= navController)
@@ -39,8 +39,8 @@ fun AppNavigation(
         composable(AppScreens.LoseScreen.route) {
             LoseScreen(nav= navController)
         }
-        composable(AppScreens.RankScreen.route) {
-            RankScreen(nav= navController)
+        composable(AppScreens.ScoreScreen.route) {
+            ScoreScreen(nav= navController)
         }
         composable(AppScreens.StoreScreen.route) {
             StoreScreen(nav= navController)
