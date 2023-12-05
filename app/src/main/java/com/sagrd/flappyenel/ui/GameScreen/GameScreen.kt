@@ -169,7 +169,7 @@ fun GameScreen(
         .fillMaxSize()
         .clickable {
             if (alive) {
-                y -= 110
+                y -= 100
             }
 
         }){
@@ -177,7 +177,7 @@ fun GameScreen(
             .fillMaxWidth()
             .padding(5.dp),horizontalArrangement = Arrangement.Center) {
             Surface(color = Color(0xFFEAE4C3),modifier = Modifier.border(border = BorderStroke(width = 1.dp, color = Color.Black))) {
-                Text(text = "${points} pts", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
+                Text(text = "${points} pts / $chikenPosition ", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
             }
 
         }
@@ -186,17 +186,11 @@ fun GameScreen(
 
             .fillMaxWidth()
         ){
-            Chiken(y =y ,
-                modifier = Modifier
-                    .size(50.dp, 50.dp)
-                    .onGloballyPositioned {
-                        chikenPosition = it.positionInWindow()
-                    }
-            )
+            Chiken(y =y)
             Pipe(x = x, y = pipe_height,
                 modifier = Modifier, fast = fast
             )
-            Pipe(x = x, y = (pipe_height-850),
+            Pipe(x = x, y = (pipe_height-900),
                 modifier = Modifier, fast = fast
             )
 

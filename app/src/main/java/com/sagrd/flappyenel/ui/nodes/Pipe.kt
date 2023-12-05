@@ -108,7 +108,7 @@ fun Pipe(
     }
 }
 fun isTouching(position2: Offset, position3 : Offset): Boolean {
-    return ((chikenPosition.x -position3.x).absoluteValue <20 &&  chikenPosition.y in position2.y..position3.y)
+    return ((chikenPosition.x -position3.x).absoluteValue <40 &&  chikenPosition.y in position2.y-50..position3.y+50)
 }
 fun getTheme(fast:Float) : FloatArray{
     val hielo = floatArrayOf(

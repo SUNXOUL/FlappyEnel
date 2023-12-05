@@ -138,7 +138,7 @@ fun MenuScreen(
                 }
             }
         }
-        if (player.jugadorId == 0){
+        if (false){
             if (toLogedUser){
                 LoginModal(loginViewModel = loginViewModel)
             }
