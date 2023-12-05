@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 data class JugadorUiState(
     var sesion : Boolean = false,
-    var jugador : JugadorDto? = JugadorDto(0,"","",0),
+    var jugador : JugadorDto? = JugadorDto(0,"","",""),
     var mensaje : String = ""
 )
 
