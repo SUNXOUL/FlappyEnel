@@ -17,7 +17,8 @@ class GameViewModel @Inject constructor(
     private val repository: JugadorRepository
 ) : ViewModel(){
 
-    var jugador by mutableStateOf(JugadorDto(jugadorId = 0, nombreCompleto = ""
+    var jugador by mutableStateOf(JugadorDto(
+        jugadorId = 0, nombreCompleto = ""
     , usuario = "", clave = ""))
 
     var jugadorError by mutableStateOf(false)

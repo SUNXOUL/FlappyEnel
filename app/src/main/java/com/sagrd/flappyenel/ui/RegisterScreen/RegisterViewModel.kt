@@ -19,14 +19,14 @@ class RegisterViewModel @Inject constructor(
     private val repository: JugadorRepository
 ) : ViewModel(){
 
-    var nombreCompleto by mutableStateOf("")
+    var claveRepetida by mutableStateOf("")
     var usuario by mutableStateOf("")
     var clave by mutableStateOf("")
 
-    var nombreCompletoError by mutableStateOf(false)
+    var claveRepetidaError by mutableStateOf(false)
     var usuarioError by mutableStateOf(false)
     var claveError by mutableStateOf(false)
-
+    var mensaje : String = ""
     fun onUsuarioChange(valor:String){
         usuario= valor
         usuarioError= valor.isNullOrBlank()
@@ -35,34 +35,43 @@ class RegisterViewModel @Inject constructor(
         clave=valor
         claveError= valor.isNullOrBlank()
     }
-    fun onNombreCompletoChange(valor:String){
-        nombreCompleto= valor
-        nombreCompletoError= valor.isNullOrBlank()
+    fun onClaveRepetidaChange(valor:String){
+        claveRepetida= valor
+        claveRepetidaError= claveRepetida != clave
     }
 
 
     fun validate() : Boolean
     {
-        onNombreCompletoChange(nombreCompleto)
+        onClaveRepetidaChange(claveRepetida)
         onUsuarioChange(usuario)
         onClaveChange(clave)
 
-        return claveError || usuarioError || nombreCompletoError
+        return !claveError && !usuarioError && !claveRepetidaError
     }
 
     fun toRegister(){
-        viewModelScope.launch {
-            repository.toRegister(JugadorDto(jugadorId = 0, nombreCompleto = nombreCompleto
-            , usuario = usuario, clave = clave))
-            clean()
+        if (validate()){
+            viewModelScope.launch {
+                repository.toRegister(JugadorDto(
+                    jugadorId = 0, nombreCompleto = ""
+                    , usuario = usuario, clave = clave))
+                clean()
+            }
         }
+        else
+        {
+            mensaje = "INVALID DATA"
+        }
+
     }
 
     fun clean()
     {
-        nombreCompleto = ""
+        claveRepetida = ""
         usuario = ""
         clave = ""
+        mensaje=""
     }
 
 

@@ -6,9 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
-import com.sagrd.flappyenel.data.remote.dto.ServiceResponseDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
-import com.sagrd.flappyenel.util.Resources.Resource
+import com.sagrd.flappyenel.player
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,8 +29,8 @@ class LoginViewModel @Inject constructor(
     private val repository : JugadorRepository
 ) : ViewModel(){
 
-    private val _uiState =  MutableStateFlow(JugadorUiState())
-    val uiState : StateFlow<JugadorUiState> = _uiState.asStateFlow()
+    private var _uiState =  MutableStateFlow(JugadorUiState())
+    var uiState : StateFlow<JugadorUiState> = _uiState.asStateFlow()
 
     var usuario by mutableStateOf("")
     var clave by mutableStateOf("")
@@ -51,20 +50,29 @@ class LoginViewModel @Inject constructor(
 
     fun login()
     {
-        viewModelScope.launch {
-            var response = repository.login(usuario, clave)
+        if (validate()){
+            viewModelScope.launch {
+                var response = repository.login(usuario, clave)
 
-            if (response != null) {
-                _uiState.update { it.copy(jugador = response.data ?: null, sesion = response.success , mensaje = response.message) }
-            }
-            else
-            {
-                _uiState.value.mensaje = "Error para iniciar sesion"
-                _uiState.value.sesion = false
-            }
+                if (response != null) {
+                    _uiState.update { it.copy(jugador = response.data ?: null, sesion = response.success , mensaje = response.message) }
+                    uiState = _uiState
+                    _uiState.collect{
+                        player = it.jugador!!
+                    }
+                }
+                else
+                {
+                    _uiState.value.mensaje = "Error para iniciar sesion"
+                    _uiState.value.sesion = false
+                }
 
+            }
         }
-
+        else
+        {
+            uiState.value.mensaje="USERNAME OR PASSWORD ARE INCORRECT "
+        }
     }
 
     fun clean()
@@ -76,7 +84,7 @@ class LoginViewModel @Inject constructor(
     fun validate() : Boolean{
         onUsuarioChange(usuario)
         onClaveChange(clave)
-        return onUsuarioError || onClaveError
+        return !onUsuarioError && !onClaveError
 
     }
 
