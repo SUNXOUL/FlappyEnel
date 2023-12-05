@@ -21,7 +21,7 @@
  </div>
  
  # Installation
-Only for test the beta on your android:
+Only for test the beta on your `android`:
 ```sh
 git clone https://github.com/SUNXOUL/FlappyEnel.git
 ```
