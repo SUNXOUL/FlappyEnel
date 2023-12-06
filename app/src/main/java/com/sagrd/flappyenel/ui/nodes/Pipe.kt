@@ -77,9 +77,8 @@ fun Pipe(
 
                 ){
                     Image(painter = painterResource(id = R.drawable.pipe_cover), contentDescription ="",
-                        modifier= Modifier.fillMaxSize(), colorFilter = ColorFilter.colorMatrix(ColorMatrix(
-                            getTheme(fast)
-                        )) )
+                        modifier= Modifier.fillMaxSize(),
+                        colorFilter = ColorFilter.colorMatrix(ColorMatrix(getTheme(fast))))
                 }
                 Box(
                     modifier = modifier
