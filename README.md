@@ -1,5 +1,5 @@
 
-[![N|Solid](https://raw.githubusercontent.com/SUNXOUL/FlappyEnel/master/app/src/main/res/drawable-nodpi/durelogo.gif)]
+![N|Solid](https://raw.githubusercontent.com/SUNXOUL/FlappyEnel/master/app/src/main/res/drawable-nodpi/durelogo.gif)
 <div id="header" align="center">
 
 
