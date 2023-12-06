@@ -112,7 +112,7 @@ fun GameScreen(
                     println(pipe_height)
                     if(alive){
                         points++
-                        if(fast<1.7f){
+                        if(fast<=1.3f){
                             fast += 0.02f
                         }
                     }
@@ -143,7 +143,7 @@ fun GameScreen(
                 }
             }
             .build()
-        if (fast>=1 && fast<1.7f){
+        if (fast>=0.6 && fast<1f){
             Image(
                 painter = rememberAsyncImagePainter(
                     ImageRequest.Builder(context).data(data = R.drawable.oceanbackground).apply(block = {
@@ -157,7 +157,7 @@ fun GameScreen(
                     .aspectRatio(2.5f, matchHeightConstraintsFirst = true)
             )
         }
-        if (fast>=1.7){
+        if (fast>=1){
             Image(
                 painter = rememberAsyncImagePainter(
                     ImageRequest.Builder(context).data(data = R.drawable.hellbackground).apply(block = {

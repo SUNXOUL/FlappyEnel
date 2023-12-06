@@ -128,10 +128,10 @@ fun getTheme(fast:Float) : FloatArray{
         0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.0f, 0.0f, 0.0f, 1.0f, 0.0f
     )
-    if (fast>=1 && fast<1.7f) {
+    if (fast>=0.6 && fast<1) {
         return hielo
     }
-    if (fast>=1.7) {
+    if (fast>=1) {
         return lava
     }
     return verde
