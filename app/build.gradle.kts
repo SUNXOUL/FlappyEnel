@@ -126,6 +126,9 @@ android {
 
         implementation ("androidx.compose.ui:ui-text-google-fonts:1.5.2")
 
+        //DataStorage
+        implementation ("androidx.datastore:datastore-preferences:1.0.0")
+
         //gifs and more coil's things
         implementation ("io.coil-kt:coil-compose:2.1.0")
         implementation ("io.coil-kt:coil-gif:2.1.0")
