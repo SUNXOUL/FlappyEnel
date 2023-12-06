@@ -98,7 +98,7 @@ fun MenuScreen(
                 Image(painter =  musicButtonPaint, contentDescription ="Music")
             }
 
-            Text(text = player.usuario, fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h4)
+            Text(text = player.usuario, fontFamily = fontPixel,color = Color.Black, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h4)
                 if(player.jugadorId != 0)
                 {
                     IconButton(onClick = { exit = true },modifier = Modifier
@@ -192,7 +192,7 @@ fun ExitModal(
                 .padding(20.dp)
                 .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
             {
-                Text(text = "DO YOU WANT TO LOG OUT?", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
+                Text(text = "DO YOU WANT TO LOG OUT?", fontFamily = fontPixel,color = Color.Black, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
                 Spacer(modifier = Modifier.padding(top=10.dp))
                 Row {
                     TextButton(onClick = {
@@ -204,7 +204,7 @@ fun ExitModal(
                         Text(text = "SI", fontFamily = fontPixel,style = MaterialTheme.typography.h5, color = Color.Red)
                     }
                     TextButton(onClick = { exit = false }) {
-                        Text(text = "NO", fontFamily = fontPixel,style = MaterialTheme.typography.h5)
+                        Text(text = "NO", fontFamily = fontPixel,color = Color.Black,style = MaterialTheme.typography.h5)
                     }
                 }
 

@@ -186,7 +186,7 @@ fun GameScreen(
             .fillMaxWidth()
             .padding(5.dp),horizontalArrangement = Arrangement.Center) {
             Surface(color = Color(0xFFEAE4C3),modifier = Modifier.border(border = BorderStroke(width = 1.dp, color = Color.Black))) {
-                Text(text = "${points} pts ", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
+                Text(text = "${points} pts ",color = Color.Black, fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
             }
 
         }
@@ -226,6 +226,7 @@ fun GameScreen(
 
                     Text(
                         text = "${points} pts",
+                        color = Color.Black,
                         style = MaterialTheme.typography.h2,
                         fontFamily = fontPixel
                     )

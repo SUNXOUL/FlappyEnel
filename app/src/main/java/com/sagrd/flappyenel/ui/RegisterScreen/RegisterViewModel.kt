@@ -9,6 +9,7 @@ import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
 import com.sagrd.flappyenel.player
 import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
+import com.sagrd.flappyenel.ui.MenuScreen.exit
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -62,6 +63,7 @@ class RegisterViewModel @Inject constructor(
                 if (response != null) {
                     player = response.data
                     player.jugadorId?.let { storage.saveID(it) }
+                    exit = false
                 }
             }
         }

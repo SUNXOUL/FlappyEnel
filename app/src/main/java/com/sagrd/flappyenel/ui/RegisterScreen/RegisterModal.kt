@@ -70,10 +70,10 @@ fun RegisterModal(
                     .padding(20.dp)
                     .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
                 {
-                    Text(text = "Register", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
+                    Text(text = "Register",color = Color.Black, fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
                     Spacer(modifier = Modifier.padding(top=10.dp))
                     TextField(value = registerViewModel.usuario, onValueChange = {registerViewModel.onUsuarioChange(it)}, label = {
-                        Text(text = "USERNAME", fontFamily = fontPixel)
+                        Text(text = "USERNAME",color = Color.Black, fontFamily = fontPixel)
                     },
                         isError = registerViewModel.usuarioError,
                         maxLines = 1,
@@ -87,7 +87,7 @@ fun RegisterModal(
                     TextField(
                         value = registerViewModel.clave,
                         onValueChange = { registerViewModel.onClaveChange(it)},
-                        label = { Text(text="PASSWORD", fontFamily = fontPixel) },
+                        label = { Text(text="PASSWORD",color = Color.Black, fontFamily = fontPixel) },
                         singleLine = true,
                         isError = registerViewModel.claveError,
                         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -111,7 +111,7 @@ fun RegisterModal(
                     TextField(
                         value = registerViewModel.claveRepetida,
                         onValueChange = { registerViewModel.onClaveRepetidaChange(it)},
-                        label = { Text(text="REPEAT THE PASSWORD", fontFamily = fontPixel) },
+                        label = { Text(text="REPEAT THE PASSWORD",color = Color.Black, fontFamily = fontPixel) },
                         singleLine = true,
                         isError = registerViewModel.claveRepetidaError,
                         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -122,7 +122,7 @@ fun RegisterModal(
                             unfocusedBorderColor = Color.Gray
                         )
                     )
-                    Text(text = registerViewModel.mensaje, fontFamily = fontPixel)
+                    Text(text = registerViewModel.mensaje,color = Color.Black, fontFamily = fontPixel)
                     Spacer(modifier = Modifier.padding(top=10.dp))
                     IconButton(onClick = { registerViewModel.toRegister(storage=storage) },modifier = Modifier
                         .padding(10.dp)
@@ -130,7 +130,7 @@ fun RegisterModal(
                         Image(painter =  painterResource(id = R.drawable.loginbutton), contentDescription ="login")
                     }
                     TextButton(onClick = { toLogedUser=true }) {
-                        Text(text = "I have Account", fontFamily = fontPixel)
+                        Text(text = "I have Account",color = Color.Black, fontFamily = fontPixel)
                     }
 
                 }

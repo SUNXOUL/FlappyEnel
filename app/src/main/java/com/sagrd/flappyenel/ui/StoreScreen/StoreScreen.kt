@@ -107,6 +107,7 @@ fun StoreScreen(
                                             text = "SELECT",
                                             fontFamily = fontPixel,
                                             fontWeight = FontWeight.Bold,
+                                            color = Color.Black,
                                             modifier = Modifier.padding(5.dp),
                                             style = MaterialTheme.typography.h5
                                         )

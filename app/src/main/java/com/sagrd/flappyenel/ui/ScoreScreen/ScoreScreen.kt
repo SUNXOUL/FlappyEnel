@@ -16,8 +16,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,7 +46,9 @@ fun ScoreScreen(
 {
     var players = scoreViewModel.uiState.value.jugadores
     val fontPixel = Font(R.font.pixelfont).toFontFamily()
-    Column ( modifier = Modifier.padding(10.dp).fillMaxSize()){
+    Column ( modifier = Modifier
+        .padding(10.dp)
+        .fillMaxSize()){
         Row (modifier = Modifier.fillMaxWidth()){
             IconButton(onClick = { nav.navigate(AppScreens.MenuScreen.route) },modifier = Modifier
                 .padding(10.dp)
@@ -78,6 +82,7 @@ fun ScoreScreen(
                     fontFamily = fontPixel,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(5.dp),
+                    color = Color.Black,
                     style = MaterialTheme.typography.h3
                 )
                 Divider(color = Color(0xFFEF5C03), thickness = 5.dp)
@@ -85,36 +90,42 @@ fun ScoreScreen(
                 LazyColumn() {
 
                     items(players) { player ->
-                        ElevatedCard(
+                        Card(
                             modifier = Modifier
                                 .padding(3.dp)
                                 .fillMaxWidth()
                         ) {
-                            Row(
-                                modifier = Modifier
-                                    .padding(2.dp)
-                                    .fillMaxWidth()
-                            ) {
-                                Text(
-                                    text = player.usuario,
-                                    fontFamily = fontPixel,
-                                    fontWeight = FontWeight.Bold,
+                            Surface (
+                                color = Color.White
+                            ){
+                                Row(
                                     modifier = Modifier
                                         .padding(2.dp)
-                                        .weight(1f),
-                                    style = MaterialTheme.typography.h6
-                                )
-                                Text(
-                                    text = "${player.puntuacion.toString()} pts",
-                                    fontFamily = fontPixel,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier
-                                        .padding(2.dp)
-                                        .weight(1f),
-                                    style = MaterialTheme.typography.h6
-                                )
+                                        .fillMaxWidth()
+                                ) {
+                                    Text(
+                                        text = player.usuario,
+                                        fontFamily = fontPixel,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.Black,
+                                        modifier = Modifier
+                                            .padding(2.dp)
+                                            .weight(1f),
+                                        style = MaterialTheme.typography.h6
+                                    )
+                                    Text(
+                                        text = "${player.puntuacion.toString()} pts",
+                                        fontFamily = fontPixel,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.Black,
+                                        modifier = Modifier
+                                            .padding(2.dp)
+                                            .weight(1f),
+                                        style = MaterialTheme.typography.h6
+                                    )
+                                }
                             }
-                        }
+                            }
                     }
                 }
             }

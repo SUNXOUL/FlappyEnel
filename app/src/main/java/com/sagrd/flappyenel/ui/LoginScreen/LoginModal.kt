@@ -70,13 +70,13 @@ fun LoginModal(
                     .padding(20.dp)
                     .fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center)
                 {
-                    Text(text = "Login", fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
+                    Text(text = "Login", color = Color.Black,fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h5)
                     Spacer(modifier = Modifier.padding(top=10.dp))
                     TextField(value = loginViewModel.usuario, onValueChange = {loginViewModel.onUsuarioChange(it)},
                         isError = loginViewModel.onUsuarioError,
                         singleLine = true,
                         label = {
-                        Text(text = "USERNAME", fontFamily = fontPixel)
+                        Text(text = "USERNAME",color = Color.Black, fontFamily = fontPixel)
                     },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             focusedBorderColor = Color(0xFFEF5C03),
@@ -88,7 +88,7 @@ fun LoginModal(
                     TextField(
                         value = loginViewModel.clave,
                         onValueChange = {loginViewModel.onClaveChange(it) },
-                        label = { Text(text="PASSWORD", fontFamily = fontPixel) },
+                        label = { Text(text="PASSWORD", color = Color.Black,fontFamily = fontPixel) },
                         singleLine = true,
                         isError = loginViewModel.onClaveError,
                         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
@@ -108,7 +108,7 @@ fun LoginModal(
                             unfocusedBorderColor = Color.Gray
                         )
                     )
-                    Text(text = loginViewModel.uiState.value.mensaje, fontFamily = fontPixel)
+                    Text(text = loginViewModel.uiState.value.mensaje,color = Color.Black, fontFamily = fontPixel)
                     Spacer(modifier = Modifier.padding(top=10.dp))
                     IconButton(onClick = { loginViewModel.login(storage=storage)},modifier = Modifier
                         .padding(10.dp)
@@ -116,7 +116,7 @@ fun LoginModal(
                         Image(painter =  painterResource(id = R.drawable.loginbutton), contentDescription ="login")
                     }
                     TextButton(onClick = { toLogedUser = false }) {
-                        Text(text = "Create Account", fontFamily = fontPixel)
+                        Text(text = "Create Account",color = Color.Black, fontFamily = fontPixel)
                     }
 
                 }
