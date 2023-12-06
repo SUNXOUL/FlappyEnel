@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
+import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
 import com.sagrd.flappyenel.ui.MenuScreen.MenuScreen
 import com.sagrd.flappyenel.ui.SplashScreen.SplashScreen
 import com.sagrd.flappyenel.ui.theme.FlappyEnelTheme
@@ -56,6 +57,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 var toLogedUser by mutableStateOf(true)
 var skinSelected by mutableIntStateOf(0)
 var skins = mutableListOf<Int>((R.drawable.flappy__7_),(R.drawable.miguelskin),(R.drawable.gregoryskin),(R.drawable.juniorskin) )

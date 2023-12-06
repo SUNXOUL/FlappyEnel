@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sagrd.flappyenel.ui.GameScreen.GameScreen
+import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
 import com.sagrd.flappyenel.ui.LoseScreen.LoseScreen
 import com.sagrd.flappyenel.ui.MenuScreen.MenuScreen
 import com.sagrd.flappyenel.ui.ScoreScreen.ScoreScreen
@@ -20,7 +21,7 @@ fun AppNavigation(
     music : MediaPlayer
 )
 {
-
+    val storage : SessionStorage = SessionStorage(context)
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -31,7 +32,7 @@ fun AppNavigation(
            SplashScreen(nav = navController)
         }
         composable(AppScreens.MenuScreen.route) {
-            MenuScreen(music =  music , nav = navController )
+            MenuScreen(music =  music , nav = navController, storage = storage)
         }
         composable(AppScreens.GameScreen.route) {
             GameScreen(nav= navController)

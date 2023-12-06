@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
 import com.sagrd.flappyenel.player
+import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,7 +49,7 @@ class LoginViewModel @Inject constructor(
         onClaveError= valor.isNullOrBlank()
     }
 
-    fun login()
+    fun login(storage: SessionStorage)
     {
         if (validate()){
             viewModelScope.launch {
@@ -57,9 +58,11 @@ class LoginViewModel @Inject constructor(
                 if (response != null) {
                     _uiState.update { it.copy(jugador = response.data ?: null, sesion = response.success , mensaje = response.message) }
                     uiState = _uiState
-                    _uiState.collect{
-                        player = it.jugador!!
+                    _uiState.collect{jugador->
+                        player = jugador.jugador!!
+                        player.jugadorId?.let { storage.saveID(it) }
                     }
+
                 }
                 else
                 {

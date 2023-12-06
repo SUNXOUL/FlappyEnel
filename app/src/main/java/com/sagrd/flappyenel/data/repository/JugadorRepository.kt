@@ -28,15 +28,20 @@ class JugadorRepository @Inject constructor(
         }
     }
 
-    fun getJugadorById(id: Int): Flow<Resource<ServiceResponseDto<JugadorDto>?>> = flow {
-        try {
-            emit(Resource.Loading())
-            val jugador = jugadorApi.getJugadorById(id)
-            emit(Resource.Success(jugador))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e.message ?: "Error HTTP"))
-        } catch (e: IOException) {
-            emit(Resource.Error(e.message ?: "Verificar Conexion"))
+    suspend fun getJugadorById(id: Int): ServiceResponseDto<JugadorDto>?
+    {
+        return try {
+            withContext(Dispatchers.IO) {
+                val response = jugadorApi.getJugadorById(id)
+                response.let {  }
+                if (response?.isSuccessful == true) {
+                    response.body()
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            throw e
         }
     }
 

@@ -41,12 +41,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.toLogedUser
+import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterModal(
-    registerViewModel: RegisterViewModel
+    registerViewModel: RegisterViewModel,
+    storage: SessionStorage
 ) {
 
     val fontPixel = Font(R.font.pixelfont).toFontFamily()
@@ -122,7 +124,7 @@ fun RegisterModal(
                     )
                     Text(text = registerViewModel.mensaje, fontFamily = fontPixel)
                     Spacer(modifier = Modifier.padding(top=10.dp))
-                    IconButton(onClick = { registerViewModel.toRegister() },modifier = Modifier
+                    IconButton(onClick = { registerViewModel.toRegister(storage=storage) },modifier = Modifier
                         .padding(10.dp)
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.loginbutton), contentDescription ="login")

@@ -15,7 +15,7 @@ interface JugadorApi {
     @GET("api/Jugador")
     suspend fun getJugadores() : ServiceResponseDto<List<JugadorDto>>?
     @GET("api/Jugador/{id}")
-    suspend fun getJugadorById(@Path("id") jugadorId : Int) : ServiceResponseDto<JugadorDto>?
+    suspend fun getJugadorById(@Path("id") jugadorId : Int) :  Response<ServiceResponseDto<JugadorDto>>?
     @POST("api/Jugador")
     suspend fun postJugador(@Body jugador : JugadorDto) : Response<JugadorDto>
     @DELETE("api/Jugador/{id}")

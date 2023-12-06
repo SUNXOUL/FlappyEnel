@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
 import com.sagrd.flappyenel.player
+import com.sagrd.flappyenel.ui.GameScreen.storage.SessionStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -51,14 +52,17 @@ class RegisterViewModel @Inject constructor(
         return !claveError && !usuarioError && !claveRepetidaError
     }
 
-    fun toRegister(){
+    fun toRegister(storage: SessionStorage) {
         if (validate()){
             viewModelScope.launch {
-                var response = repository.toRegister(JugadorDto(
+                val response = repository.toRegister(JugadorDto(
                     jugadorId = 0, nombreCompleto = ""
                     , usuario = usuario, clave = clave))
                 clean()
-                    player = response!!
+                if (response != null) {
+                    player = response.data
+                    player.jugadorId?.let { storage.saveID(it) }
+                }
             }
         }
         else
