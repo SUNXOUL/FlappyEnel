@@ -22,7 +22,7 @@
  
  # Installation
 
-[#APK📱 Download]: https://github.com/SUNXOUL/FlappyEnel/raw/master/app/release/FLAPPYENEL.apk
+[#APK📱 Download](https://github.com/SUNXOUL/FlappyEnel/raw/master/app/release/FLAPPYENEL.apk)
 
 Only for test the beta on your `android`:
 ```sh
