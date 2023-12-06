@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -15,6 +16,19 @@ class SessionStorage(public val context: Context) {
         public val Context.dataStoree : DataStore<Preferences> by preferencesDataStore("USERSTORAGE")
         val USER = stringPreferencesKey("USER")
         val CLAVE = stringPreferencesKey("CLAVE")
+        val ID = intPreferencesKey("ID")
+
+    }
+
+    val getID: Flow<Int?> = context.dataStoree.data.map { p ->
+        p[ID]
+    }
+
+    suspend fun saveID(value: Int)
+    {
+        context.dataStoree.edit { preferences ->
+            preferences[ID] = value
+        }
     }
 
     val getUser: Flow<String?> = context.dataStoree.data.map { p ->
