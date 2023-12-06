@@ -1,7 +1,3 @@
-#Power by
-![N|Solid](https://raw.githubusercontent.com/SUNXOUL/FlappyEnel/master/app/src/main/res/drawable-nodpi/durelogo.gif)
-<div id="header" align="center">
-
 
 <img src="https://avatars.githubusercontent.com/u/122837710?v=4" width=115><br>[<sub>Cesar Reynoso</sub>]<br>| (https://github.com/realSTRU) |
  <BR>
