@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sagrd.flappyenel.data.remote.dto.JugadorDto
 import com.sagrd.flappyenel.data.repository.JugadorRepository
+import com.sagrd.flappyenel.player
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -53,10 +54,11 @@ class RegisterViewModel @Inject constructor(
     fun toRegister(){
         if (validate()){
             viewModelScope.launch {
-                repository.toRegister(JugadorDto(
+                var response = repository.toRegister(JugadorDto(
                     jugadorId = 0, nombreCompleto = ""
                     , usuario = usuario, clave = clave))
                 clean()
+                    player = response!!
             }
         }
         else

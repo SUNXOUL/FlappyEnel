@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.toFontFamily
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
@@ -50,6 +51,8 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
 import com.sagrd.flappyenel.R
+import com.sagrd.flappyenel.data.remote.dto.JugadorDto
+import com.sagrd.flappyenel.player
 import com.sagrd.flappyenel.ui.nodes.Chiken
 import com.sagrd.flappyenel.ui.nodes.Pipe
 import com.sagrd.flappyenel.ui.nodes.alive
@@ -61,7 +64,8 @@ var points by mutableIntStateOf(0)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameScreen(
-    nav :NavController
+    nav :NavController,
+    gameViewModel: GameViewModel = hiltViewModel()
 ) {
     var y by remember { mutableStateOf(0f) }
     val density = LocalDensity.current.density
@@ -87,8 +91,11 @@ fun GameScreen(
                 }
                 else{
                     alive=false
+
                 }
             }
+            gameViewModel.onJugadorChange(JugadorDto(jugadorId = player.jugadorId, nombreCompleto = "none", usuario = player.usuario, puntuacion = points, clave = player.clave ))
+            gameViewModel.lose()
 
         }
 
@@ -146,7 +153,8 @@ fun GameScreen(
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .fillMaxSize().aspectRatio(2.5f, matchHeightConstraintsFirst = true)
+                    .fillMaxSize()
+                    .aspectRatio(2.5f, matchHeightConstraintsFirst = true)
             )
         }
         if (fast>=1.7){
@@ -159,7 +167,8 @@ fun GameScreen(
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .fillMaxSize().aspectRatio(2.5f, matchHeightConstraintsFirst = true)
+                    .fillMaxSize()
+                    .aspectRatio(2.5f, matchHeightConstraintsFirst = true)
             )
         }
 

@@ -8,25 +8,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.TextButton
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +22,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,9 +34,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.toFontFamily
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -60,7 +44,6 @@ import com.sagrd.flappyenel.ui.LoginScreen.LoginModal
 import com.sagrd.flappyenel.ui.LoginScreen.LoginViewModel
 import com.sagrd.flappyenel.ui.RegisterScreen.RegisterModal
 import com.sagrd.flappyenel.ui.RegisterScreen.RegisterViewModel
-import com.sagrd.flappyenel.ui.nodes.alive
 import com.sagrd.personas.Nav.AppScreens
 import kotlinx.coroutines.delay
 
@@ -83,7 +66,7 @@ fun MenuScreen(
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(10.dp)) {
-        Row (modifier = Modifier.fillMaxWidth()){
+        Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
             IconButton(onClick = {
                 musicButtonPaint = if(music.isPlaying){
                     music.pause()
@@ -97,7 +80,7 @@ fun MenuScreen(
             ){
                 Image(painter =  musicButtonPaint, contentDescription ="Music")
             }
-            Text(text = player.usuario, fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h3)
+            Text(text = player.usuario, fontFamily = fontPixel, fontWeight = FontWeight.Bold , modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.h4)
 
         }
         Box {
@@ -138,7 +121,7 @@ fun MenuScreen(
                 }
             }
         }
-        if (false){
+        if (player.jugadorId==0){
             if (toLogedUser){
                 LoginModal(loginViewModel = loginViewModel)
             }

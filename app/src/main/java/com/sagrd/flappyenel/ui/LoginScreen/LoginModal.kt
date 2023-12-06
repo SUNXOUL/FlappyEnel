@@ -41,7 +41,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.toLogedUser
-import com.sagrd.flappyenel.ui.nodes.alive
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)

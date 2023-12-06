@@ -56,7 +56,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 var toLogedUser by mutableStateOf(true)
 var skinSelected by mutableIntStateOf(0)
 var skins = mutableListOf<Int>((R.drawable.flappy__7_),(R.drawable.miguelskin),(R.drawable.gregoryskin),(R.drawable.juniorskin) )

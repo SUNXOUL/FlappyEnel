@@ -4,8 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -43,8 +41,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.sagrd.flappyenel.R
 import com.sagrd.flappyenel.toLogedUser
-import com.sagrd.flappyenel.ui.LoginScreen.LoginViewModel
-import com.sagrd.flappyenel.ui.nodes.alive
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -131,7 +127,7 @@ fun RegisterModal(
                         .fillMaxWidth()) {
                         Image(painter =  painterResource(id = R.drawable.loginbutton), contentDescription ="login")
                     }
-                    TextButton(onClick = { toLogedUser = true }) {
+                    TextButton(onClick = { toLogedUser=true }) {
                         Text(text = "I have Account", fontFamily = fontPixel)
                     }
 
