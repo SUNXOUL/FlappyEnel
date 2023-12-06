@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.IconButton
@@ -48,68 +49,79 @@ fun StoreScreen(
                 Image(painter =  painterResource(id = R.drawable.backbutton), contentDescription ="Play")
             }
         }
-        Text(
-            text = "SKINS",
-            fontFamily = fontPixel,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(5.dp),
-            style = MaterialTheme.typography.h3
-        )
-        Divider(color = Color(0xFFEF5C03), thickness = 5.dp)
-        Box(){
-            Image(
-                painter = painterResource(id = R.drawable.modal),
-                contentDescription = "",
-                contentScale = ContentScale.FillHeight,
-                modifier = Modifier.fillMaxSize()
-            )
-            LazyRow(
-                Modifier
-                    .fillMaxSize()
-                    .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically){
-                items(skins){ skin ->
-                    Surface(
-                        modifier = Modifier.padding(10.dp),
-                        color = Color.Transparent
-                    ) {
-                        Column {
+
+        Column {
+           Column(modifier = Modifier.weight(1.5f)) {
+               Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically, modifier=Modifier.fillMaxWidth()) {
+                   Image(
+                       painter = painterResource(id = skins[skinSelected]),
+                       contentDescription = "",
+                       contentScale = ContentScale.FillBounds,
+                       modifier = Modifier.fillMaxSize()
+                   )
+               }
+           }
+            Box(modifier = Modifier.weight(1f)){
+                LazyRow(
+                    Modifier
+                        .fillMaxSize()
+                        .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically){
+                    items(skins){ skin ->
+                        Surface(
+                            modifier = Modifier
+                                .padding(10.dp)
+                                .size(200.dp, 200.dp),
+                            color = Color.Transparent,
+
+                            ) {
                             Image(
-                                painter = painterResource(id = skin),
+                                painter = painterResource(id = R.drawable.modal),
                                 contentDescription = "",
                                 contentScale = ContentScale.FillBounds,
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .weight(1.5f)
+                                modifier = Modifier.fillMaxSize()
                             )
-                            TextButton(onClick = { skinSelected = skins.indexOf(skin) }, modifier = Modifier.weight(1f)) {
-                                if(skinSelected == skins.indexOf(skin)){
-                                    Text(
-                                        text = "SELECTED",
-                                        fontFamily = fontPixel,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color(0xFFEF5C03),
-                                        modifier = Modifier.padding(5.dp),
-                                        style = MaterialTheme.typography.h4
-                                    )
-                                }
-                                else{
-                                    Text(
-                                        text = "SELECT",
-                                        fontFamily = fontPixel,
-                                        fontWeight = FontWeight.Bold,
-                                        modifier = Modifier.padding(5.dp),
-                                        style = MaterialTheme.typography.h4
-                                    )
-                                }
+                            Column(modifier = Modifier.padding(10.dp)) {
+                                Image(
+                                    painter = painterResource(id = skin),
+                                    contentDescription = "",
+                                    contentScale = ContentScale.FillBounds,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .weight(1.5f)
+                                )
+                                TextButton(onClick = { skinSelected = skins.indexOf(skin) }, modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxWidth()) {
+                                    if(skinSelected == skins.indexOf(skin)){
+                                        Text(
+                                            text = "SELECTED",
+                                            fontFamily = fontPixel,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color(0xFFEF5C03),
+                                            modifier = Modifier.padding(5.dp),
+                                            style = MaterialTheme.typography.h5
+                                        )
+                                    }
+                                    else{
+                                        Text(
+                                            text = "SELECT",
+                                            fontFamily = fontPixel,
+                                            fontWeight = FontWeight.Bold,
+                                            modifier = Modifier.padding(5.dp),
+                                            style = MaterialTheme.typography.h5
+                                        )
+                                    }
 
+                                }
                             }
+
                         }
 
                     }
-
                 }
             }
         }
+
 
     }
 }

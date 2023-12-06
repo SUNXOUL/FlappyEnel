@@ -14,6 +14,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -32,14 +34,15 @@ var chikenPosition by mutableStateOf(Offset(0f, 0f))
 @Composable
 fun Chiken(
     y : Float,
-    modifier : Modifier
 ) {
     Box(
         modifier = Modifier
-            .offset(x = 20.dp, y = (y).dp).size(60.dp,65.dp)
-
+            .offset(x = 20.dp, y = (y).dp)
+            .onGloballyPositioned {
+                chikenPosition = it.positionInWindow()
+            }
     ) {
-
+        Box(modifier = Modifier.size(60.dp, 65.dp)){
             val context = LocalContext.current
             val imageLoader = ImageLoader.Builder(context)
                 .components {
@@ -54,7 +57,7 @@ fun Chiken(
                 painter = painterResource(id = skins[skinSelected]),
                 contentDescription = "Player", modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.FillBounds
-                )
-
+            )
+        }
     }
 }
