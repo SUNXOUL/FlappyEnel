@@ -25,5 +25,5 @@ interface JugadorApi {
     @GET("api/Jugador/{usuario}/{clave}")
     suspend fun login(@Path("usuario") usuario : String, @Path("clave") clave : String) :  Response<ServiceResponseDto<JugadorDto>>
     @POST("api/Jugador/ToRegister")
-    suspend fun toRegister(@Body jugador : JugadorDto) : Response<JugadorDto>
+    suspend fun toRegister(@Body jugador : JugadorDto) : Response<ServiceResponseDto<JugadorDto>>
 }

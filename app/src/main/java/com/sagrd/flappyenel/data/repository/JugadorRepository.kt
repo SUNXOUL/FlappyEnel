@@ -79,7 +79,7 @@ class JugadorRepository @Inject constructor(
         }
     }
 
-    suspend fun toRegister(jugador : JugadorDto): JugadorDto? {
+    suspend fun toRegister(jugador : JugadorDto): ServiceResponseDto<JugadorDto>?{
         return try {
             withContext(Dispatchers.IO) {
                 val response = jugadorApi.toRegister(jugador)
